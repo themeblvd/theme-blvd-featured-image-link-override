@@ -36,7 +36,7 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 = 1.0.1 =
 
-*Fixed bug with override being applied when it shouldn't be.
+* Fixed bug with override being applied when it shouldn't be.
 
 = 1.0.0 =
 
