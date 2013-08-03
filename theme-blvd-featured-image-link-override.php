@@ -44,6 +44,9 @@ function themeblvd_filo_options() {
 	// First make sure they're using a theme that supports this.
 	if( function_exists( 'themeblvd_add_option_section' ) ) {
 
+		// Add configuration tab, if it doesn't exist.
+		themeblvd_add_option_tab( 'config', __( 'Configuration', 'themeblvd_filo' ) );
+
 		// Setup params
 		$name = __( 'Featured Image Link Override', 'themeblvd_filo' );
 		$description = __( 'The Theme Blvd framework has an intricate internal system for displaying posts and their respective featured images. You can configure what link wraps each post\'s featured image. However, this can only be done individually for each post. By default, when you create a new post, this setting will always start at "Featured Image is not a link."<br><br>This is a problem if you\'re creating a site where you want all featured images to do one action because then you\'d have to change the "Featured Image Link" setting for each post you create, one-by-one. Unfortunately, with the logic of the framework the way it is, there\'s really no good way for us to accommodate this without losing other aspects.<br><br>So, this plugin is your solution -- a bit of a "hack" to allow you do to accomplish this. The two options below for this plugin will apply to <strong>ALL</strong> of your posts that currently have the default setting, "Featured Image is not a link."', 'themeblvd_filo' );
