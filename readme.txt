@@ -36,9 +36,12 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 = 1.0.4 =
 
+* Fixed Configuration options not showing on Theme Options page for Theme Blvd Framework 2.3+.
+* Fixed lightbox functionality for Theme Blvd Framework 2.3+.
+
 = 1.0.3 =
 
-* Added thumbnail styling classes used in Theme Blvd framework v2.2+.  
+* Added thumbnail styling classes used in Theme Blvd framework v2.2+.
 
 = 1.0.2 =
 
