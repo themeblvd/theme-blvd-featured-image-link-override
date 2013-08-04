@@ -93,6 +93,7 @@ function themeblvd_filo_post_thumbnail( $output, $location, $size, $link ) {
 	global $post;
 
 	$override = false;
+	$lightbox = false;
 	$link = false;
 	$link_url = '';
 	$link_target = '';
@@ -137,6 +138,7 @@ function themeblvd_filo_post_thumbnail( $output, $location, $size, $link ) {
 						$link_url = get_permalink( $post->ID );
 						break;
 					case 'image' :
+						$lightbox = true;
 						$link = true;
 						$thumb_link_meta = 'image';
 						$link_url = wp_get_attachment_url( $attachment_id );
@@ -174,17 +176,45 @@ function themeblvd_filo_post_thumbnail( $output, $location, $size, $link ) {
 		if( $thumb_link_meta != 'thumbnail' )
 			$anchor_class .= ' '.$thumb_link_meta;
 
-		// Final HTML output
+		// Build output
 		if( has_post_thumbnail( $post->ID ) ) {
+
+			// Image
+			$image = get_the_post_thumbnail( $post->ID, $size, array( 'class' => '' ) );
+
+			// Wrap in link
+			if( $link ) {
+
+				if ( $lightbox && function_exists( 'themeblvd_get_link_to_lightbox' ) ) {
+
+					$args = apply_filters( 'themeblvd_featured_image_lightbox_args', array(
+						'item'	=> $image.themeblvd_get_image_overlay(),
+						'link'	=> $link_url,
+						'class'	=> $anchor_class,
+						'title'	=> get_the_title()
+					), $post->ID, $attachment_id );
+
+					$image = themeblvd_get_link_to_lightbox( $args );
+
+				} else {
+
+					// This link is either not going to a lightbox, or if it is,
+					// we're working with Theme Blvd Framework prior to 2.3.
+					$image = '<a href="'.$link_url.'"'.$link_target.' class="'.$anchor_class.'"'.$title.'>'.$image.$end_link.'</a>';
+
+				}
+
+			}
+
+			// Final output
 			$output .= '<div class="featured-image-wrapper '.$classes.'">';
 			$output .= '<div class="featured-image">';
 			$output .= '<div class="featured-image-inner">';
-			if( $link ) $output .= '<a href="'.$link_url.'"'.$link_target.' class="'.$anchor_class.'"'.$title.'>';
-			$output .= get_the_post_thumbnail( $post->ID, $size, array( 'class' => '' ) );
-			if( $link ) $output .= $end_link.'</a>';
+			$output .= $image;
 			$output .= '</div><!-- .featured-image-inner (end) -->';
 			$output .= '</div><!-- .featured-image (end) -->';
 			$output .= '</div><!-- .featured-image-wrapper (end) -->';
+
 		}
 	}
 
