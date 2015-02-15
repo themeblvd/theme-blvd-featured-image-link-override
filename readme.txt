@@ -36,6 +36,8 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 = 1.0.5 =
 
+* Compatibility for Theme Blvd Framework 2.5+.
+
 = 1.0.4 =
 
 * Fixed Configuration options not showing on Theme Options page for Theme Blvd Framework 2.3+.
