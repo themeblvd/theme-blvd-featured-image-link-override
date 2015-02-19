@@ -36,6 +36,8 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 = 1.0.6 =
 
+* GlotPress compatibility (for 2015 wordpress.org release).
+
 = 1.0.5 =
 
 * Compatibility for Theme Blvd Framework 2.5+.
