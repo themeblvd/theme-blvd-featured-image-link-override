@@ -228,9 +228,21 @@ function themeblvd_filo_post_thumbnail( $output, $location, $size, $link = null 
 
 			// Image
 			if ( version_compare(TB_FRAMEWORK_VERSION, '2.5.0', '>=') ) {
+
 				$image = get_the_post_thumbnail( $post->ID, $size, array( 'class' => $img_class ) );
+
+				if ( is_array($location) && ! empty($location['img_before']) ) {
+					$image = $location['img_before'].$image;
+				}
+
+				if ( is_array($location) && ! empty($location['img_after']) ) {
+					$image .= $location['img_after'];
+				}
+
 			} else {
+
 				$image = get_the_post_thumbnail( $post->ID, $size, array( 'class' => '' ) );
+
 			}
 
 			// Wrap in link
