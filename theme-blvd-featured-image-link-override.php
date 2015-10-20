@@ -130,7 +130,7 @@ function themeblvd_filo_post_thumbnail( $output, $location, $size, $link = null 
 
 			// Check for the single post override to the
 			// plugin override. Confused, yet?
-			if ( $filo_single === 'false' && is_single() ) {
+			if ( ( $filo_single === 'false' && is_single() ) || is_attachment() ) {
 				$override = false;
 			}
 

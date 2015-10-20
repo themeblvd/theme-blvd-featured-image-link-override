@@ -36,6 +36,8 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 = 1.0.7 - 10/20/2015 =
 
+* Fixed: Featured image override shouldn't effect attachment pages.
+
 = 1.0.6 - 08/04/2015 =
 
 * Fixed: Post showcase thumbnails not showing post titles (Theme Blvd Framework 2.5+ themes).
