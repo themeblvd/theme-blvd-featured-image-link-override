@@ -34,34 +34,34 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 == Changelog ==
 
-= 1.0.7 =
+= 1.0.7 - 10/20/2015 =
 
-= 1.0.6 =
+= 1.0.6 - 08/04/2015 =
 
 * Fixed: Post showcase thumbnails not showing post titles (Theme Blvd Framework 2.5+ themes).
 * GlotPress compatibility (for 2015 wordpress.org release).
 
-= 1.0.5 =
+= 1.0.5 - 02/15/2015 =
 
 * Compatibility for Theme Blvd Framework 2.5+.
 
-= 1.0.4 =
+= 1.0.4 - 08/04/2013 =
 
 * Fixed Configuration options not showing on Theme Options page for Theme Blvd Framework 2.3+.
 * Fixed lightbox functionality for Theme Blvd Framework 2.3+.
 
-= 1.0.3 =
+= 1.0.3 - 12/24/2012 =
 
 * Added thumbnail styling classes used in Theme Blvd framework v2.2+.
 
-= 1.0.2 =
+= 1.0.2 - 08/29/2012 =
 
 * Added in ability to override featured image links for posts never saved with the Theme Blvd theme active.
 
-= 1.0.1 =
+= 1.0.1 - 08/29/2012 =
 
 * Fixed bug with override being applied when it shouldn't be.
 
-= 1.0.0 =
+= 1.0.0 - 06/03/2012 =
 
 * This is the first release.
