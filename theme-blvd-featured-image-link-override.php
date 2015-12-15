@@ -2,7 +2,7 @@
 /*
 Plugin Name: Theme Blvd Featured Image Link Override
 Description: When using a theme with Theme Blvd framework version 2.1.0+, this plugin allows you to set featured image link options globally throughout your site.
-Version: 2.0.0
+Version: 2.0.1
 Author: Jason Bobich
 Author URI: http://jasonbobich.com
 License: GPL2
@@ -89,26 +89,32 @@ add_action('after_setup_theme', 'themeblvd_filo_options');
  */
 function themeblvd_filo_thumb_link( $val, $post_id, $key ) {
 
-	if ( $key != '_tb_thumb_link' ) {
-		return $val;
-	}
+	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
 
-	if ( $val && $val != 'inactive' ) {
-		return $val;
-	}
+		if ( $key != '_tb_thumb_link' ) {
+			return $val;
+		}
 
-	$filo = themeblvd_get_option('filo');
+		if ( $val && $val != 'inactive' ) {
+			return $val;
+		}
 
-	if ( ! $filo || $filo == 'none' ) {
-		return $val;
-	}
+		$filo = themeblvd_get_option('filo');
 
-	themeblvd_set_att('doing_filo', true);
+		if ( ! $filo || $filo == 'none' ) {
+			return $val;
+		}
 
-	if ( $filo == 'post' ) {
-		return 'post';
-	} else if ( $filo == 'image' ) {
-		return 'thumbnail';
+		if ( function_exists('themeblvd_set_att') ) {
+			themeblvd_set_att('doing_filo', true);
+		}
+
+		if ( $filo == 'post' ) {
+			return 'post';
+		} else if ( $filo == 'image' ) {
+			return 'thumbnail';
+		}
+
 	}
 
 	return $val;
@@ -122,23 +128,29 @@ add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
  */
 function themeblvd_filo_thumb_link_single( $val, $post_id, $key ) {
 
-	if ( $key != '_tb_thumb_link_single' ) {
-		return $val;
+	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
+
+		if ( $key != '_tb_thumb_link_single' ) {
+			return $val;
+		}
+
+		$thumb_link = get_post_meta($post_id, '_tb_thumb_link', true); // trigger our other filter
+
+		if ( ! themeblvd_get_att('doing_filo') ) {
+			return $val;
+		}
+
+		$single = themeblvd_get_option('filo_single');
+
+		if ( $single != 'true' ) {
+			return $val;
+		}
+
+		return 'yes';
+
 	}
 
-	$thumb_link = get_post_meta($post_id, '_tb_thumb_link', true); // trigger our other filter
-
-	if ( ! themeblvd_get_att('doing_filo') ) {
-		return $val;
-	}
-
-	$single = themeblvd_get_option('filo_single');
-
-	if ( $single != 'true' ) {
-		return $val;
-	}
-
-	return 'yes';
+	return $val;
 }
 add_filter('get_post_metadata', 'themeblvd_filo_thumb_link_single', 10, 3);
 
