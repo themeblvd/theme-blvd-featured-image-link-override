@@ -34,7 +34,9 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 == Changelog ==
 
-= 2.0.0 XX/XX/XXXX =
+= 2.0.0 - XX/XX/XXXX =
+
+* Improvement: Simplified presence on Theme Options page.
 
 = 1.0.7 - 10/20/2015 =
 

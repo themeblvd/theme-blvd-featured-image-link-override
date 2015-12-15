@@ -51,10 +51,8 @@ function themeblvd_filo_options() {
 		// Add configuration tab, if it doesn't exist.
 		themeblvd_add_option_tab( 'config', __( 'Configuration', 'theme-blvd-featured-image-link-override' ) );
 
-		// Setup params
-		$name = __( 'Featured Image Link Override', 'theme-blvd-featured-image-link-override' );
-		$description = __( 'The Theme Blvd framework has an intricate internal system for displaying posts and their respective featured images. You can configure what link wraps each post\'s featured image. However, this can only be done individually for each post. By default, when you create a new post, this setting will always start at "Featured Image is not a link."<br><br>This is a problem if you\'re creating a site where you want all featured images to do one action because then you\'d have to change the "Featured Image Link" setting for each post you create, one-by-one. Unfortunately, with the logic of the framework the way it is, there\'s really no good way for us to accommodate this without losing other aspects.<br><br>So, this plugin is your solution -- a bit of a "hack" to allow you do to accomplish this. The two options below for this plugin will apply to <strong>ALL</strong> of your posts that currently have the default setting, "Featured Image is not a link."', 'theme-blvd-featured-image-link-override' );
-		$options = array(
+		// Add option section
+		themeblvd_add_option_section( 'config', 'filo', __( 'Featured Image Link Override', 'theme-blvd-featured-image-link-override' ), '', array(
 			array(
 				'name' 		=> __( 'Link Override', 'theme-blvd-featured-image-link-override' ),
 				'desc' 		=> __( 'Select how you\'d like all featured image links currently set to "Featured image is not a link" to be overridden.', 'theme-blvd-featured-image-link-override' ),
@@ -62,7 +60,7 @@ function themeblvd_filo_options() {
 				'std' 		=> 'none',
 				'type' 		=> 'radio',
 				'options'	=> array(
-					'none' 	=> __( 'No, do not apply any override.', 'theme-blvd-featured-image-link-override' ),
+					'none' 	=> __( 'No, do not apply override.', 'theme-blvd-featured-image-link-override' ),
 					'post' 	=> __( 'Featured images link to their posts.', 'theme-blvd-featured-image-link-override' ),
 					'image'	=> __( 'Featured images link to their enlarged versions in a lightbox.', 'theme-blvd-featured-image-link-override' )
 				)
@@ -78,10 +76,7 @@ function themeblvd_filo_options() {
 					'false' => __( 'No, do not apply the above override to single posts.', 'theme-blvd-featured-image-link-override' )
 				)
 			)
-		);
-
-		// Add option section
-		themeblvd_add_option_section( 'config', 'filo', $name, $description, $options );
+		));
 	}
 
 	// Filter post thumbnail
