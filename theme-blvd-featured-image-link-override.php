@@ -136,7 +136,7 @@ function themeblvd_filo_thumb_link_single( $val, $post_id, $key ) {
 
 		$thumb_link = get_post_meta($post_id, '_tb_thumb_link', true); // trigger our other filter
 
-		if ( ! themeblvd_get_att('doing_filo') ) {
+		if ( ! function_exists('themeblvd_get_att') || ! themeblvd_get_att('doing_filo') ) {
 			return $val;
 		}
 
