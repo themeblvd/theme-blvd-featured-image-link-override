@@ -34,8 +34,9 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 == Changelog ==
 
-= 2.0.0 - XX/XX/XXXX =
+= 2.0.0 - 12/15/2015 =
 
+* Improvement: Frontend functionality was re-written to filter the meta data of posts, opposed to the actual featured images. As more Theme Blvd themes and updates are released, this will ensure better compatibility for the long haul.
 * Improvement: Simplified presence on Theme Options page.
 
 = 1.0.7 - 10/20/2015 =
