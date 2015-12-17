@@ -72,8 +72,8 @@ function themeblvd_filo_options() {
 				'std' 		=> 'true',
 				'type' 		=> 'radio',
 				'options'	=> array(
-					'true' 	=> __( 'Yes, apply the above override to single posts, too.', 'theme-blvd-featured-image-link-override' ),
-					'false' => __( 'No, do not apply the above override to single posts.', 'theme-blvd-featured-image-link-override' )
+					'true' 		=> __( 'Yes, apply the above override to single posts, too.', 'theme-blvd-featured-image-link-override' ),
+					'false' 	=> __( 'No, do not apply the above override to single posts.', 'theme-blvd-featured-image-link-override' )
 				)
 			)
 		));
@@ -89,24 +89,26 @@ add_action('after_setup_theme', 'themeblvd_filo_options');
  */
 function themeblvd_filo_thumb_link( $val, $post_id, $key ) {
 
+	if ( $key != '_tb_thumb_link' ) {
+		return null;
+	}
+
 	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
 
-		if ( $key != '_tb_thumb_link' ) {
-			return $val;
-		}
+		remove_filter('get_post_metadata', 'themeblvd_filo_thumb_link');
+
+		$val = get_post_meta($post_id, '_tb_thumb_link', true);
+
+		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
 
 		if ( $val && $val != 'inactive' ) {
-			return $val;
+			return null;
 		}
 
 		$filo = themeblvd_get_option('filo');
 
 		if ( ! $filo || $filo == 'none' ) {
-			return $val;
-		}
-
-		if ( function_exists('themeblvd_set_att') ) {
-			themeblvd_set_att('doing_filo', true);
+			return null;
 		}
 
 		if ( $filo == 'post' ) {
@@ -117,7 +119,7 @@ function themeblvd_filo_thumb_link( $val, $post_id, $key ) {
 
 	}
 
-	return $val;
+	return null;
 }
 add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
 
@@ -128,29 +130,40 @@ add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
  */
 function themeblvd_filo_thumb_link_single( $val, $post_id, $key ) {
 
+	if ( $key != '_tb_thumb_link_single' ) {
+		return null;
+	}
+
 	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
 
-		if ( $key != '_tb_thumb_link_single' ) {
-			return $val;
+		remove_filter('get_post_metadata', 'themeblvd_filo_thumb_link');
+
+		$thumb_link = get_post_meta($post_id, '_tb_thumb_link', true);
+
+		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
+
+		if ( $thumb_link && $thumb_link != 'inactive' ) {
+			return null;
 		}
 
-		$thumb_link = get_post_meta($post_id, '_tb_thumb_link', true); // trigger our other filter
+		$filo = themeblvd_get_option('filo');
 
-		if ( ! function_exists('themeblvd_get_att') || ! themeblvd_get_att('doing_filo') ) {
-			return $val;
+		if ( ! $filo || $filo == 'none' ) {
+			return null;
 		}
 
 		$single = themeblvd_get_option('filo_single');
 
-		if ( $single != 'true' ) {
-			return $val;
+		if ( $single === 'thumbnail' ) {
+			return 'thumbnail';
+		} else if ( $single === 'true' ) {
+			return 'yes';
+		} else {
+			return 'no';
 		}
-
-		return 'yes';
-
 	}
 
-	return $val;
+	return null;
 }
 add_filter('get_post_metadata', 'themeblvd_filo_thumb_link_single', 10, 3);
 
