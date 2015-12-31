@@ -95,11 +95,11 @@ function themeblvd_filo_thumb_link( $val, $post_id, $key ) {
 
 	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
 
-		remove_filter('get_post_metadata', 'themeblvd_filo_thumb_link');
+		remove_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20);
 
 		$val = get_post_meta($post_id, '_tb_thumb_link', true);
 
-		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
+		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3);
 
 		if ( $val && $val != 'inactive' ) {
 			return null;
@@ -121,7 +121,7 @@ function themeblvd_filo_thumb_link( $val, $post_id, $key ) {
 
 	return null;
 }
-add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
+add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3);
 
 /**
  * Add filter to _tb_thumb_link_single custom field.
@@ -136,11 +136,11 @@ function themeblvd_filo_thumb_link_single( $val, $post_id, $key ) {
 
 	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
 
-		remove_filter('get_post_metadata', 'themeblvd_filo_thumb_link');
+		remove_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20);
 
 		$thumb_link = get_post_meta($post_id, '_tb_thumb_link', true);
 
-		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 10, 3);
+		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3);
 
 		if ( $thumb_link && $thumb_link != 'inactive' ) {
 			return null;
@@ -165,7 +165,7 @@ function themeblvd_filo_thumb_link_single( $val, $post_id, $key ) {
 
 	return null;
 }
-add_filter('get_post_metadata', 'themeblvd_filo_thumb_link_single', 10, 3);
+add_filter('get_post_metadata', 'themeblvd_filo_thumb_link_single', 30, 3);
 
 /**
  * Register text domain for localization.

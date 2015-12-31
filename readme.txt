@@ -36,6 +36,8 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 = 2.0.3 - 12/31/2015 =
 
+* Fixed: There were some issues in some themes with the first post in certain situations not getting the image link override setting.
+
 = 2.0.2 - 12/16/2015 =
 
 * Fixed: Featured image link override should only get applied if the user hasn't set one on the current post already.
