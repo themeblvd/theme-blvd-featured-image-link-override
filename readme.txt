@@ -34,7 +34,9 @@ The two options will apply to **ALL** of your posts that currently have the defa
 
 == Changelog ==
 
-= 2.0.4 - XX/XX/XXXX =
+= 2.0.4 - 12/15/2016 =
+
+* Fixed: Link overriding not working after updating to WordPress 4.7.
 
 = 2.0.3 - 12/31/2015 =
 
