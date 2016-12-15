@@ -42,7 +42,9 @@ No biggy.
 function themeblvd_filo_options() {
 
 	if ( ! defined('TB_FRAMEWORK_VERSION') ) {
+
 		return;
+
 	}
 
 	// First make sure they're using a theme that supports this.
@@ -80,7 +82,7 @@ function themeblvd_filo_options() {
 	}
 
 }
-add_action('after_setup_theme', 'themeblvd_filo_options');
+add_action( 'after_setup_theme', 'themeblvd_filo_options' );
 
 /**
  * Add filter to _tb_thumb_link custom field.
@@ -90,38 +92,49 @@ add_action('after_setup_theme', 'themeblvd_filo_options');
 function themeblvd_filo_thumb_link( $val, $post_id, $key ) {
 
 	if ( $key != '_tb_thumb_link' ) {
-		return null;
+
+		return $val;
+
 	}
 
 	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
 
 		remove_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20);
 
-		$val = get_post_meta($post_id, '_tb_thumb_link', true);
+		$new_val = get_post_meta($post_id, '_tb_thumb_link', true);
 
 		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3);
 
-		if ( $val && $val != 'inactive' ) {
-			return null;
+		if ( $new_val && $new_val != 'inactive' ) {
+
+			return $val;
+
 		}
 
 		$filo = themeblvd_get_option('filo');
 
 		if ( ! $filo || $filo == 'none' ) {
-			return null;
+
+			return $val;
+
 		}
 
 		if ( $filo == 'post' ) {
+
 			return 'post';
+
 		} else if ( $filo == 'image' ) {
+
 			return 'thumbnail';
+
 		}
 
 	}
 
-	return null;
+	return $val;
+
 }
-add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3);
+add_filter( 'get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3 );
 
 /**
  * Add filter to _tb_thumb_link_single custom field.
@@ -131,7 +144,9 @@ add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3);
 function themeblvd_filo_thumb_link_single( $val, $post_id, $key ) {
 
 	if ( $key != '_tb_thumb_link_single' ) {
-		return null;
+
+		return $val;
+
 	}
 
 	if ( ! is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
@@ -143,29 +158,40 @@ function themeblvd_filo_thumb_link_single( $val, $post_id, $key ) {
 		add_filter('get_post_metadata', 'themeblvd_filo_thumb_link', 20, 3);
 
 		if ( $thumb_link && $thumb_link != 'inactive' ) {
-			return null;
+
+			return $val;
+
 		}
 
 		$filo = themeblvd_get_option('filo');
 
 		if ( ! $filo || $filo == 'none' ) {
-			return null;
+
+			return $val;
+
 		}
 
 		$single = themeblvd_get_option('filo_single');
 
 		if ( $single === 'thumbnail' ) {
+
 			return 'thumbnail';
+
 		} else if ( $single === 'true' ) {
+
 			return 'yes';
+
 		} else {
+
 			return 'no';
+
 		}
 	}
 
-	return null;
+	return $val;
+
 }
-add_filter('get_post_metadata', 'themeblvd_filo_thumb_link_single', 30, 3);
+add_filter( 'get_post_metadata', 'themeblvd_filo_thumb_link_single', 30, 3 );
 
 /**
  * Register text domain for localization.
@@ -173,6 +199,8 @@ add_filter('get_post_metadata', 'themeblvd_filo_thumb_link_single', 30, 3);
  * @since 1.0.6
  */
 function themeblvd_filo_localize() {
+
 	load_plugin_textdomain('theme-blvd-featured-image-link-override');
+
 }
-add_action('init', 'themeblvd_filo_localize');
+add_action( 'init', 'themeblvd_filo_localize' );
